@@ -1,0 +1,43 @@
+name: mafat_radar_challenge
+
+channels:
+  - pytorch
+  - conda-forge
+
+dependencies:
+  - python=3.8
+  - numpy
+  - scipy
+  - tsfresh
+  - matplotlib
+  - pandas
+  - pytest
+  - flake8
+  - rope
+  - autopep8
+  - black
+  - click
+  - jupyter
+  - pyyaml
+  - scikit-learn
+  - opencv
+  - pytorch>=1.1.0
+  - torchvision
+  - cudatoolkit=10.0
+  - tensorboard>=1.14
+  - absl-py
+  - future
+  - tqdm
+  - albumentations==0.4.6
+  - librosa==0.8.0
+  - pip
+  - imgaug
+  - pylint
+  - zarr
+  - pip:
+    - torch-summary
+    - timm==0.1.26
+    - pytorch-tabnet
+    - efficientnet_pytorch==0.6.3
+    - git+https://github.com/zhanghang1989/ResNeSt
+    - -e .  # install package in development mode

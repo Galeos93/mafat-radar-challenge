@@ -1,0 +1,32 @@
+name: MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered{}
+submission_dir: /home/agarcia/repos/mafat-radar-challenge/submissions
+model_checkpoints: 
+    - /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered0/1005-005432/checkpoints/model_best.pth
+    - /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered1/1005-021455/checkpoints/model_best.pth
+    - /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered2/1005-033519/checkpoints/model_best.pth
+    - /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered3/1005-045546/checkpoints/model_best.pth
+    - /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_b2_pruned_more_aux_more_synth_specaug_simple_aug_v9_adam_centered4/1005-061620/checkpoints/model_best.pth
+seed: 1234
+target_devices: [0]
+
+arch:
+  type: TimmEfficientNet
+  args:
+    net_name: efficientnet_b2_pruned
+    num_classes: 1
+    pretrained: true
+
+augmentation:
+  type: ImgAugExpTransform
+  args:
+    image_size: [252, 64]
+
+data_loader:
+  type: MAFATTestDataLoader
+  args:
+    batch_size: 64
+    data_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_test_v9_spectrogram.npy
+    csv_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/MAFAT RADAR Challenge - Public Test Set V1.csv
+    nworkers: 2
+    use_metadata: false
+

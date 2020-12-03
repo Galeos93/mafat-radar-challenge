@@ -1,0 +1,27 @@
+name: MAFAT_replica_aug_eff_timm_b2_more_aux_more_synth_specaug_simple_aug_v5_adam_centered_ep_11
+submission_dir: /home/agarcia/repos/mafat-radar-challenge/submissions
+model_checkpoint: /mnt/agarcia_HDD/mafat-radar-challenge-experiment/MAFAT_replica_aug_eff_timm_b2_more_aux_more_synth_specaug_simple_aug_v5_adam_centered/0912-190748/checkpoints/checkpoint-epoch11.pth
+seed: 1234
+target_devices: [0]
+
+arch:
+  type: TimmEfficientNet
+  args:
+    net_name: tf_efficientnet_b2_ns
+    num_classes: 1
+    pretrained: true
+
+augmentation:
+  type: ImgAugExpTransform
+  args:
+    image_size: [252, 64]
+
+data_loader:
+  type: MAFATTestDataLoader
+  args:
+    batch_size: 64
+    data_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_test_v7_spectrogram.npy
+    csv_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/MAFAT RADAR Challenge - Public Test Set V1.csv
+    nworkers: 2
+    use_metadata: false
+

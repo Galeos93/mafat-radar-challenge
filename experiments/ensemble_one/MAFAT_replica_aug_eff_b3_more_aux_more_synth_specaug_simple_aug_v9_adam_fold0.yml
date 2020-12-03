@@ -1,0 +1,64 @@
+arch:
+  args:
+    net_name: efficientnet-b3
+    num_classes: 1
+    pretrained: true
+  type: EfficientNetBase
+augmentation:
+  args:
+    image_size:
+    - 300
+    - 76
+  type: ImgAugExpTransform
+data_loader:
+  args:
+    batch_size: 32
+    csv_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_train_v9_fold0.csv
+    data_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_train_v9_spectrogram_fold0.npy
+    nworkers: 8
+    shuffle: false
+    use_metadata: false
+  type: MAFATTrainDataLoader
+folds: 5
+loss:
+  args:
+    pos_weight: 1
+  type: binary_cross_entropy_with_logits
+lr_scheduler:
+  args:
+    gamma: 0.3
+    step_size: 10
+  type: StepLR
+metrics:
+- auc_score_metric
+- average_classification_error_rate
+name: MAFAT_replica_aug_eff_b3_more_aux_more_synth_specaug_simple_aug_v9_adam_fold0
+optimizer:
+  args:
+    lr: 0.001
+    weight_decay: 0.001
+  type: AdamW
+sampler:
+  args:
+    p: 0.2
+  type: WeightedSourceSampler
+save_dir: /mnt/agarcia_HDD/mafat-radar-challenge-experiment
+save_images: true
+seed: 1234
+target_devices:
+- 0
+training:
+  early_stop: 30
+  epochs: 20
+  monitor: min val_loss
+  save_period: 1
+  tensorboard: true
+val_data_loader:
+  args:
+    batch_size: 16
+    csv_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_val_v9_fold0.csv
+    data_dir: /home/agarcia/repos/mafat-radar-challenge/mafat_radar_challenge/data/mafat_val_v9_spectrogram_fold0.npy
+    nworkers: 2
+    shuffle: false
+    use_metadata: false
+  type: MAFATValDataLoader
